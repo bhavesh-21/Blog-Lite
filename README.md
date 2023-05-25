@@ -22,7 +22,7 @@
 
 # Blog Lite
 
-![Image](./web_pic/blog-black.png){: width="100px"}
+![Image](./web_pic/blog-black.png){:  width="100px"}
 
 # Local Run
 1. run make_env.sh to me virtual enviornment.
