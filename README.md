@@ -28,7 +28,7 @@
 2. run Run.sh to run app.py after activating virtual enviornment.
 3. Goto http://localhost:8000 to view app.
 
-#ER Diagram
+# ER Diagram
 ![Image](https://raw.githubusercontent.com/bhavesh-21/Images/2992094a1d9a887e37d66461adda5c32e80ba715/MAD-1-BlogLite-ER-diagram.png)
 
 # Tables
