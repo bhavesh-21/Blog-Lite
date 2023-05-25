@@ -24,6 +24,9 @@
 
 ![Image](./web_pic/blog-black.png){:  width="100px"}
 
+<img src="./web_pic/blog-black.png" alt="Image" style="width: 100px;">
+
+
 # Local Run
 1. run make_env.sh to me virtual enviornment.
 2. run Run.sh to run app.py after activating virtual enviornment.
