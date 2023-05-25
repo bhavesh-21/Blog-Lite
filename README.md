@@ -22,12 +22,12 @@
 
 # Blog Lite
 
-![Image](./web_pic/blog-black.png)
+![Image](./web_pic/blog-black.png){: width="300px"}
 
 # Local Run
 1. run make_env.sh to me virtual enviornment.
 2. run Run.sh to run app.py after activating virtual enviornment.
-3. Goto http://localhost:5000 to view app.
+3. Goto http://localhost:8000 to view app.
 
 #ER Diagram
 ![Image](https://raw.githubusercontent.com/bhavesh-21/Images/2992094a1d9a887e37d66461adda5c32e80ba715/MAD-1-BlogLite-ER-diagram.png)
