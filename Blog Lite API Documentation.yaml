@@ -1,0 +1,920 @@
+openapi: 3.0.0
+info:
+  title: BlogLite API Documentation
+  version: 1.0.0
+  description: |
+    BlogLite API provides ability to add delete user get details of user or all users. Also get post details delete post comment delete comment get comment details get no of likes of a post and get number of followers and following of a given user. 
+    <br> <br>
+    With Blog Lite we can with people ike comment follow unfollow etc.
+    <br> <br>
+    Visit BlogLite with feature rich editor to write Blog Post.
+    <h2>ER Diagram</h2>
+    <img src="https://raw.githubusercontent.com/bhavesh-21/Images/2992094a1d9a887e37d66461adda5c32e80ba715/MAD-1-BlogLite-ER-diagram.png"/>
+    <h2>Users Table Schema</h2>  <table>
+      <thead>
+        <th>Column Name</th>
+        <th>Column Type</th>
+        <th>Constraints</th>
+      </thead>
+      <tbody>
+      <tr>
+        <td>id</td>
+        <td>Integer</td>
+        <td>Primary Key,Auto Increment</td>
+      </tr>
+      </tbody>
+      <tbody>
+      <tr>
+        <td>username</td>
+        <td>String</td>
+        <td>Unique,Not Null</td>
+      </tr>
+      </tbody>
+      <tbody>
+      <tr>
+        <td>name</td>
+        <td>String</td>
+        <td>Not Null</td>
+      </tr>
+      </tbody>
+      <tbody>
+      <tr>
+        <td>email</td>
+        <td>String</td>
+        <td>Unique,Not Null</td>
+      </tr>
+      </tbody>
+      <tbody>
+      <tr>
+        <td>about_author</td>
+        <td>Text</td>
+        <td>default='None'</td>
+      </tr>
+      </tbody>
+      <tbody>
+      <tr>
+        <td>last_login</td>
+        <td>DateTime</td>
+        <td>default=datetime.utcnow</td>
+      </tr>
+      </tbody>
+      <tbody>
+      <tr>
+        <td>profile_pic</td>
+        <td>String</td>
+        <td>default='default_profile_pic.png'</td>
+      </tr>
+      </tbody>
+      <tbody>
+      <tr>
+        <td>password_hash</td>
+        <td>String</td>
+        <td></td>
+      </tr>
+      </tbody>
+    </table>  
+      <h2>Posts Table Schema</h2>  <table>
+      <thead>
+        <th>Column Name</th>
+        <th>Column Type</th>
+        <th>Constraints</th>
+      </thead>
+      <tbody>
+      <tr>
+        <td>id</td>
+        <td>Integer</td>
+        <td>Primary Key,Auto Increment</td>
+      </tr>
+      </tbody>
+      <tbody>
+      <tr>
+        <td>content</td>
+        <td>Text</td>
+        <td></td>
+      </tr>
+      </tbody>
+      <tbody>
+      <tr>
+        <td>timestamp</td>
+        <td>DateTime</td>
+        <td>default=datetime.utcnow </td>
+      </tr>
+      </tbody>
+      <tbody>
+      <tr>
+        <td>slug</td>
+        <td>String</td>
+        <td></td>
+      </tr>
+      </tbody>
+      <tbody>
+      <tr>
+        <td>thumbnail</td>
+        <td>String</td>
+        <td>default='default_thumbnail.jpg'</td>
+      </tr>
+      </tbody>
+      <tbody>
+      <tr>
+        <td>poster_id</td>
+        <td>Integer</td>
+        <td>ForeignKey('users.id'),Not Null</td>
+      </tr>
+      </tbody>
+    </table>
+    <h2>Comment Table Schema</h2>  <table>
+      <thead>
+        <th>Column Name</th>
+        <th>Column Type</th>
+        <th>Constraints</th>
+      </thead>
+      <tbody>
+      <tr>
+        <td>id</td>
+        <td>Integer</td>
+        <td>Primary Key,Auto Increment</td>
+      </tr>
+      </tbody>
+      <tbody>
+      <tr>
+        <td>text</td>
+        <td>String</td>
+        <td>Not Null</td>
+      </tr>
+      </tbody>
+      <tbody>
+      <tr>
+        <td>date_created</td>
+        <td>DateTime</td>
+        <td>default=datetime.utcnow</td>
+      </tr>
+      </tbody>
+      <tbody>
+      <tr>
+        <td>author</td>
+        <td>Integer</td>
+        <td>ForeignKey('users.id'), Not Null</td>
+      </tr>
+      </tbody>
+      <tbody>
+      <tr>
+        <td>post_id</td>
+        <td>Integer</td>
+        <td>ForeignKey('posts.id'), Not Null</td>
+      </tr>
+      </tbody>
+    </table>
+    <h2>Like Table Schema</h2>  <table>
+      <thead>
+        <th>Column Name</th>
+        <th>Column Type</th>
+        <th>Constraints</th>
+      </thead>
+      <tbody>
+      <tr>
+        <td>id</td>
+        <td>Integer</td>
+        <td>Primary Key,Auto Increment</td>
+      </tr>
+      </tbody>
+      <tbody>
+      <tr>
+        <td>date_created</td>
+        <td>DateTime</td>
+        <td>default=datetime.utcnow</td>
+      </tr>
+      </tbody>
+      <tbody>
+      <tr>
+        <td>author</td>
+        <td>Integer</td>
+        <td>ForeignKey('users.id'), Not Null</td>
+      </tr>
+      </tbody>
+      <tbody>
+      <tr>
+        <td>post_id</td>
+        <td>Integer</td>
+        <td>ForeignKey('posts.id'), Not Null</td>
+      </tr>
+      </tbody>
+    </table>
+    <h2>Followers Table Schema</h2>  <table>
+      <thead>
+        <th>Column Name</th>
+        <th>Column Type</th>
+        <th>Constraints</th>
+      </thead>
+      <tbody>
+      <tr>
+        <td>follower_id</td>
+        <td>Integer</td>
+        <td>ForeignKey('users.id')</td>
+      </tr>
+      </tbody>
+      <tbody>
+      <tr>
+        <td>followed_id</td>
+        <td>Integer</td>
+        <td>ForeignKey('users.id')</td>
+      </tr>
+      </tbody>
+      <tbody>
+      <tr>
+        <td>timestamp</td>
+        <td>DateTime</td>
+        <td>default=datetime.utcnow</td>
+      </tr>
+      </tbody>
+    </table> 
+    <h2> Error Codes </h2>  <table>
+      <thead>
+        <th>Resource</th>
+        <th>Error Code</th>
+        <th>Message</th>
+      </thead>
+      <tbody>
+      <tr>
+        <td>User</td>
+        <td>USR001</td>
+        <td>username is required</td>
+      </tr>
+      <tr>
+        <td>User</td>
+        <td>USR002</td>
+        <td>email is required</td>
+      </tr>
+      <tr>
+        <td>User</td>
+        <td>USR003</td>
+        <td>Invalid email</td>
+      </tr>
+      <tr>
+        <td>User</td>
+        <td>USR004</td>
+        <td>Username Already Occupied.</td>
+      </tr>
+      <tr>
+        <td>User</td>
+        <td>USR005</td>
+        <td>Please use a different email address.</td>
+      </tr>
+      </tbody>
+    </table>
+servers:
+  - url: http://127.0.0.1:8000/
+security:
+  - bearerAuth: [] 
+tags:
+  - name: user
+    description: Operations about user
+  - name: feed
+    description: Operations about feed
+  - name: post
+    description: Operations about post
+  - name: comment
+    description: Operations about comment
+  - name: likes
+    description: Operations about likes
+  - name: follower Info
+    description: Get No. of followers and following
+paths:
+  /log:
+    description: >-
+      End point to read, update and delete a user resource with username.
+    post:
+      security:
+       [] 
+      tags:
+        - user
+      summary: Get Login Token
+      consumes:
+        - application/json
+      description: Get Login Token
+      parameters:
+        - in: body
+          name: user
+          description: The user to create.
+          schema:
+            type: object
+            required:
+              - email
+              - password
+            properties:
+              email:
+                type: string
+                example: cat@gmail.com
+              password:
+                type: string
+                example: 123
+      responses:
+        '201':
+          description: Successfully Created.
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Userid'  
+        '409':
+          description: user already exist.
+        '500':
+          description: Internal Server Error.
+  /trigger-celery-job:
+    description: >-
+      End point to read, update and delete a user resource with username.
+    get:
+      tags:
+        - user
+      summary: Get User Detail
+      description: Operation to get a user details
+      parameters:
+        - in: query
+          name: me
+          required: true
+          schema:
+            type: boolean
+            example: John
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Userid'
+        '400':
+          description: Bad request.
+        '404':
+          description: Resource not found.
+        '500':
+          description: Internal Server Error.
+  
+  
+  /api/user/{username}:
+    description: >-
+      End point to read, update and delete a user resource with username.
+    get:
+      tags:
+        - user
+      summary: Get User Detail
+      description: Operation to get a user details
+      parameters:
+        - in: path
+          name: username
+          required: true
+          schema:
+            type: string
+            example: John
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Userid'
+        '400':
+          description: Bad request.
+        '404':
+          description: Resource not found.
+        '500':
+          description: Internal Server Error.
+    put:
+      tags:
+      - user
+      description: Operation to update the user detail
+      parameters:
+        - in: path
+          name: username
+          required: true
+          schema:
+            type: string
+            example: John
+      requestBody:
+        description: Update an existent user in database
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: Successfuly updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Userid'
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/badrequest'
+        '404':
+          description: Resource you requested to update not found
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+      - user
+      summary: Delete a User
+      description: Operation to delete the user.
+      parameters:
+        - in: path
+          name: username
+          required: true
+          schema:
+            type: string
+            example: John
+      responses:
+        '200':
+          description: Successfully Deleted.
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: string
+                  error_message:
+                    type: string
+        '404':
+          description: User does not exist.
+        '500':
+          description: Intenal Server Error.
+  /api/user:
+    description: End point to create a user.
+    get:
+      tags:
+       - user
+      summary: Get All Users as List
+      description: 'Get array of all users'
+      operationId: getUserByName
+      
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Userid'
+        '404':
+          description: No User in Database
+    post:
+      security:
+       [] 
+      tags:
+        - user
+      summary: Register New User
+      description: Operation to create the user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: Successfully Created.
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Userid'  
+        '409':
+          description: user already exist.
+        '500':
+          description: Internal Server Error.
+  /api/feed:
+    description: Users Feed
+    get:
+      tags:
+       - feed
+      summary: Users Feed
+      description: 'Get array of all users feed'
+      
+      operationId: get feed
+      
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/postid'
+        '404':
+          description: No post of given user
+  /api/search/feed:
+    description: >-
+      End point to read, update and delete a user resource with username.
+    get:
+      tags:
+        - feed
+      summary: Get User Detail
+      description: Operation to get a user details
+      parameters:
+        - in: query
+          name: query
+          required: true
+          schema:
+            type: string
+            example: in
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Userid'
+        '400':
+          description: Bad request.
+        '404':
+          description: Resource not found.
+        '500':
+          description: Internal Server Error.
+  /api/post/{postid}:
+    description: >-
+      End point to read, update and delete a user resource with username.
+    get:
+      tags:
+        - post
+      summary: Get Post Details
+      description: Operation to get a post details
+      parameters:
+        - in: path
+          name: postid
+          required: true
+          schema:
+            type: integer
+            example: 2
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/postid'
+        '400':
+          description: Bad request.
+        '404':
+          description: Resource not found.
+        '500':
+          description: Internal Server Error.
+    put:
+      tags:
+      - post
+      description: Operation to update the post detail
+      parameters:
+        - in: path
+          name: postid
+          required: true
+          schema:
+            type: integer
+            example: 2
+      requestBody:
+        description: Update an existent post in database
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/post'
+      responses:
+        '200':
+          description: Successfuly updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/postid'
+        '400':
+          description: Bad request.
+        '404':
+          description: Resource you requested to update not found
+        '500':
+          description: Internal Server Error
+    delete:
+      tags:
+      - post
+      summary: Delete a Post
+      description: Operation to delete the post.
+      parameters:
+        - in: path
+          name: postid
+          required: true
+          schema:
+            type: integer
+            example: 2
+      responses:
+        '200':
+          description: Successfully Deleted.
+        '400':
+          description: Bad request.
+        '404':
+          description: User does not exist.
+        '500':
+          description: Intenal Server Error.
+  /api/user/{username}/post:
+    description: End point to create a user.
+    get:
+      tags:
+       - post
+      summary: Get All posts of user as List
+      description: 'Get array of all users posts'
+      parameters:
+        - in: path
+          name: username
+          required: true
+          schema:
+            type: string
+            example: John
+      operationId: get post
+      
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/postid'
+        '404':
+          description: No post of given user
+    post:
+      tags:
+        - post
+      summary: Register New post for User
+      description: Operation to create the post for user
+      parameters:
+        - in: path
+          name: username
+          required: true
+          schema:
+            type: string
+            example: John
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/post'
+      responses:
+        '201':
+          description: Successfully Created.
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:  
+                type: object
+                properties:
+                  title:
+                    type: string
+                    example: title Required
+        '409':
+          description: post already exist.
+        '500':
+          description: Internal Server Error.
+  /api/likes/post/{postid}:
+    description: >-
+      End point to read, update and delete a user resource with username.
+    get:
+      tags:
+        - likes
+      summary: Get Post's Likes Count
+      description: Operation to get a post's Likes Count
+      parameters:
+        - in: path
+          name: postid
+          required: true
+          schema:
+            type: integer
+            example: 2
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  likes:
+                    type: integer
+                    example: 3
+        '400':
+          description: Bad request.
+        '404':
+          description: Resource not found.
+        '500':
+          description: Internal Server Error.
+  /api/user/{username}/followers:
+    description: >-
+      End point to read, update and delete a user resource with username.
+    get:
+      tags:
+        - follower Info
+      summary: Get no of followers
+      description: Operation to get no of followers
+      parameters:
+        - in: path
+          name: username
+          required: true
+          schema:
+            type: string
+            example: John
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  followers:
+                    type: integer
+                    example: 3
+        '400':
+          description: Bad request.
+        '404':
+          description: Resource not found.
+        '500':
+          description: Internal Server Error.
+  /api/user/{username}/following:
+    description: >-
+      End point to read, update and delete a user resource with username.
+    get:
+      tags:
+        - follower Info
+      summary: Get no of following
+      description: Operation to get no of following
+      parameters:
+        - in: path
+          name: username
+          required: true
+          schema:
+            type: string
+            example: John
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  following:
+                    type: integer
+                    example: 15
+        '400':
+          description: Bad request.
+        '404':
+          description: Resource not found.
+        '500':
+          description: Internal Server Error.
+  /api/comments/post/{postid}:
+    description: >-
+      End point to read, update and delete a user resource with username.
+    get:
+      tags:
+        - comment
+      summary: Get Post's all comments
+      description: Operation to get a post's all comments
+      parameters:
+        - in: path
+          name: postid
+          required: true
+          schema:
+            type: integer
+            example: 2
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 3
+                    text:
+                      type: string
+                      example: Good Post
+                    date_created:
+                      type: string
+                      example: 2023-01-10 15:45:30.949761
+                    author:
+                      type: integer
+                      example: 3
+                    post_id:
+                      type: integer
+                      example: 3
+        '400':
+          description: Bad request.
+        '404':
+          description: Resource not found.
+        '500':
+          description: Internal Server Error.
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        name:    
+          type: string
+          example: John Carter
+        username:
+          type: string
+          example: John
+        email:
+          type: string
+          example: john@email.com
+        password:
+          type: string
+          example: 123
+        about:
+          type: string
+          example: writes Blog Posts
+      xml:
+        name: user
+    Userid:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 3
+        username:
+          type: string
+          example: John
+        name:    
+          type: string
+          example: John Carter
+        email:
+          type: string
+          example: john@email.com
+        about_author:
+          type: string
+          example: writes Blog Posts
+        last_login:
+          type: string
+          example: 2023-01-09 19:46:01.479341
+        profile_pic:
+          type: string
+          example: default_profile_pic.png
+      xml:
+        name: user
+    post:
+      type: object
+      properties:
+        title:    
+          type: string
+          example: Some Post Title
+        content:
+          type: string
+          example: some post content
+        slug:
+          type: string
+          example: Some post summary
+      xml:
+        name: user
+    postid:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 3
+        title:
+          type: string
+          example: Some Post Title
+        content:    
+          type: string
+          example: some post content
+        timestamp:
+          type: string
+          example: 2023-01-09 19:46:01.479341
+        slug:
+          type: string
+          example: Some post summary
+        thumbnail:
+          type: string
+          example: default_thumbnail.jpg
+        poster_id:
+          type: integer
+          example: 11
+      xml:
+        name: user
+    badrequest:  
+      type: object
+      properties:
+        error_code:
+          type: string
+        error_message:
+          type: string
+  securitySchemes:
+    bearerAuth:            # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT   

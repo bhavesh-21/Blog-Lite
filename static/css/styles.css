@@ -1,0 +1,190 @@
+h1 {
+    color: darkblue;
+    font-size: 60px;
+}
+.hand{
+    cursor: pointer;
+}
+.vh-91{
+    height:90vh
+}
+.dropdown:hover .dropdown-menu {
+    display: inline-flexbox;
+    margin-top: 0; /* remove the gap so it doesn't close */
+}
+p {
+    color: #283149;
+}
+.vertical-center {
+    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+    min-height: 100vh; /* These two lines are counted as one :-)       */
+  
+    display: flex;
+    align-items: center;
+  }
+
+.hide {
+    visibility: hidden;
+}
+
+body {
+    background: #f4f4f4;
+    background-image: linear-gradient(to right, #DECBA4, #3E5151);
+    font-family: sans-serif;
+}
+
+.float {
+    position: absolute;
+    right: 15px;
+    bottom: 18px;
+    display: inline;
+    z-index: -1;
+}
+
+.btn-circle.btn-xl {
+    width: 140px;
+    font-size: 18px;
+    text-align: center;
+}
+
+
+#demo {
+    font-size: 12px;
+    color: darkblue;
+}
+
+a {
+    text-decoration: none;
+}
+
+.author_name {
+    color: rgb(63, 61, 61);
+    font-weight: 700;
+    display: block;
+    line-height: 1;
+}
+
+.date {
+    font-size: 13px;
+    color: #888;
+}
+
+
+
+body {
+    text-decoration: none;
+    /* font-weight: 380; */
+    /* font-size: 18px; */
+    font-family: sans-serif;
+    line-height: 26px;
+    color: #727275;
+
+}
+
+._404 {
+    line-height: 159px;
+    margin-bottom: 3px;
+    color: #131313;
+    font-size: 170px;
+    font-weight: 600;
+}
+
+h2 {
+    display: inline;
+    margin-top: 0px;
+    margin-bottom: 16px;
+    font-size: 2rem;
+    color: #212530;
+    font-weight: bold;
+    line-height: 29px;
+    font-family: sans-serif;
+    text-transform: capitalize;
+}
+
+.about-author {
+    display: flex;
+    align-items: flex-start;
+    text-align: justify;
+    margin-top: 0px;
+    margin-bottom: 40px;
+    color: #252a38;
+}
+#nav li:hover ul {
+    display: block;
+    right: 0;
+}
+
+.d{
+    
+    top: 1.2rem;
+    right: 11rem;
+    position: fixed;
+}
+
+#divfix {
+    bottom: 1.5rem;
+    right: 2rem;
+    position: fixed;
+    z-index: 3000;
+}
+
+#nav ul {
+    display: none;
+}
+#nav ul li {
+    margin-right: 0;
+}
+.about-author:hover {
+    color: #212530;
+}
+
+.profile-pic {
+    border-radius: 50%;
+}
+
+.inline {
+    display: inline;
+}
+
+h4 {
+    color: #212530;
+    margin-top: 45px;
+    margin-bottom: 45px;
+    font-weight: 560;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+}
+
+h5 {
+    color: #252a38;
+}
+
+.reply {
+    float: right;
+}
+
+.reply-body {
+    margin: 0px 7px 0px 7px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+
+.as {
+    text-align: justify;
+}
+
+.com {
+    text-align: justify;
+    word-break: break-word;
+}
+
+h6 {
+    margin-top: 10px;
+    margin-bottom: 30px;
+    color: rgb(60, 85, 84);
+    font-size: 20px;
+}
+
+img {
+    object-fit: contain;
+}
